@@ -19,7 +19,7 @@ Was the Ku Klux Klan more active in Southern states or the rest of the states? I
 
 ```{r}
 library(tidyverse)
-klans <- klanmap_data_2025_3
+klans <- read_csv("klanmap_data_2025_3.csv")
 head(klans)
 ```
 

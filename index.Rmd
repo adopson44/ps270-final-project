@@ -11,4 +11,15 @@ output:
 
 ## Project thoughts
 
-I am interested in exploring data related to how support of President Trump has changed from his campaign in 2024 to the present. I also want to see the support he has on his main policies grouped by political party.
+I am interested in exploring data related to the Ku Klux Klan and if geographical location plays a role in how many Klans are active in an area.
+
+## Project Proposal
+
+Was the Ku Klux Klan more active in Southern states or the rest of the states? In this study, I plan to examine if there were more active Ku Klux Klans in Southern states compared to the rest of the natoion. I believe that compared to the rest of the country, the states Alabama, Arkansas, Florida, Georgia, Louisiana, Mississippi, North Carolina, South Carolina, Tennessee, Texas, and Virginia combined had more active Klans. I expect this because these were the states that ceded the seceded to form the confederacy as they wanted to continue slavery. This sample compiles data of 2,000 active KKK branches from 1915-1940. My unit of analysis is the state. The explanatory variable of interest is if the state is located in the South, which I will create to be coded =0 if it is not and =1 if it is. My outcome variable is the level of KKK activity which is measured by the number of active branches of the KKK in each state during this time. If Southern states have a higher average number of active branches than non-Southern states and a positive correlation coefficient, this would support my hypothesis. If non-Southern states have an equal or greater average number of active branches than Southern states or there is no statistically significant difference, this would provide evidence against my hypothesis.
+
+```{r}
+library(tidyverse)
+klans <- klanmap_data_2025_3
+head(klans)
+```
+

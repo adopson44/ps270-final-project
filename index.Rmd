@@ -35,7 +35,7 @@ plot <- klans |>
   scale_x_discrete() +
   labs(
     x = "North v. South States",
-    y = "Number of Klans",
-    title = "Klans Compared by State")  
+    y = "Average Number of Klans",
+    title = "Klans Compared by State 1915-1940")  
 plot
 ```

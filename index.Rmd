@@ -22,4 +22,20 @@ library(tidyverse)
 klans <- read_csv("klanmap_data_2025_3.csv")
 head(klans)
 ```
-
+```{r}
+library(ggplot2)
+library(broom)
+south_states = c("Alabama", "Arkansas", "Florida", "Georgia", "Louisiana", "Mississippi", "North Carolina", "South Carolina", "Tennessee", "Texas", "Virginia" )
+plot <- klans |>
+  mutate(if_South = if_else(state %in% south_states, "South", "North")) |>
+  group_by(if_South) |>
+  summarize(mean_klan = mean(klan_number, na.rm = T)) |>
+  ggplot(aes(x = if_South, y = mean_klan)) + 
+  geom_col(binwidth = 0.5, fill = "red") +
+  scale_x_discrete() +
+  labs(
+    x = "North v. South States",
+    y = "Number of Klans",
+    title = "Klans Compared by State")  
+plot
+```

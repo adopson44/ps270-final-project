@@ -26,16 +26,27 @@ head(klans)
 library(ggplot2)
 library(broom)
 south_states = c("Alabama", "Arkansas", "Florida", "Georgia", "Louisiana", "Mississippi", "North Carolina", "South Carolina", "Tennessee", "Texas", "Virginia" )
+klans <- klans |>
+  mutate(if_South = if_else(state %in% south_states, "Southern", "Non-Southern")) 
+  
 plot <- klans |>
-  mutate(if_South = if_else(state %in% south_states, "South", "Non-Southern")) |>
   group_by(if_South) |>
   summarize(mean_klan = mean(klan_number, na.rm = T)) |>
   ggplot(aes(x = if_South, y = mean_klan)) + 
   geom_col(binwidth = 0.5, fill = "red") +
   scale_x_discrete() +
   labs(
-    x = "Non-Southern v. South States",
+    x = "Non-Southern v. Southern States",
     y = "Average Number of Klans",
     title = "Klans Compared by State 1915-1940")  
 plot
 ```
+```{r}
+table <- klans |>
+  group_by(if_South) |>
+  summarize(mean_klan = mean(klan_number, na.rm = T)) |>
+ pivot_wider(names_from = if_South,
+              values_from = mean_klan)
+knitr::kable(table)
+```
+

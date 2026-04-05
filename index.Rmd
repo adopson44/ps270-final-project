@@ -46,7 +46,10 @@ table <- klans |>
   group_by(if_South) |>
   summarize(mean_klan = mean(klan_number, na.rm = T)) |>
  pivot_wider(names_from = if_South,
-              values_from = mean_klan)
-knitr::kable(table)
+              values_from = mean_klan) |>
+  mutate(" " = "Average # of Klans") |>
+  select(" ", everything())
+knitr::kable(table,
+             digits = 2)
 ```
 

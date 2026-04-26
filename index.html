@@ -116,7 +116,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.30/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","klanmap_data_2025_3.csv"]}
+  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.30/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","klanmap_data_2025_3.csv"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1544,16 +1544,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<h2 id="project-thoughts">Project thoughts</h2>
-<p>I am interested in exploring data related to the Ku Klux Klan and if geographical location plays a role in how many Klans are active in an area.</p>
-<h2 id="project-proposal">Project Proposal</h2>
-<p>Was the Ku Klux Klan more active in Southern states or the rest of the states? In this study, I plan to examine if there were more active Ku Klux Klans in Southern states compared to the rest of the nation. I believe that compared to the rest of the country, the states Alabama, Arkansas, Florida, Georgia, Louisiana, Mississippi, North Carolina, South Carolina, Tennessee, Texas, and Virginia combined had more active Klans. I expect this because these were the states the seceded to form the confederacy as they wanted to continue slavery. This sample compiles data of 2,000 active KKK branches from 1915-1940. My unit of analysis is the state. The explanatory variable of interest is if the state is located in the South, which I will create to be coded =0 if it is not and =1 if it is. My outcome variable is the level of KKK activity which is measured by the number of active branches of the KKK in each state during this time. If Southern states have a higher average number of active branches than non-Southern states and a positive correlation coefficient, this would support my hypothesis. If non-Southern states have an equal or greater average number of active branches than Southern states or there is no statistically significant difference, this would provide evidence against my hypothesis.</p>
+<h2 id="introduction">Introduction</h2>
+<p>I am interested in exploring data related to the Ku Klux Klan and if geographical location plays a role in how many Klans are active in an area. My research question is: Was the Ku Klux Klan more active in Southern states or non-Southern states? My hypothesis is that the Southern states had more active Klans than non-Southern states. This research question is important because it is always assumed that the Southern states would have more Klans and were more racist than the non-Southern states. I want to investigate if this is truly the case.</p>
+<h2 id="data-section">Data Section</h2>
+<p>In this study, I plan to examine if there were more active Ku Klux Klans in Southern states compared to the rest of the nation. I believe that compared to the rest of the country, the states Alabama, Arkansas, Florida, Georgia, Louisiana, Mississippi, North Carolina, South Carolina, Tennessee, Texas, and Virginia combined had more active Klans. I expect this because these were the states that ceded the seceded to form the confederacy as they wanted to continue slavery.</p>
+<p>This is a cross-sectional study and I will be conducting a difference of means test. This sample compiles data of 2,000 active KKK branches from 1915-1940. My unit of analysis is the state. The explanatory variable of interest is if the state is located in the South, which I will create to be coded =0 if it is not and =1 if it is. My outcome variable is the level of KKK activity which is measured by the number of active branches of the KKK in each state during this time. If Southern states have a higher average number of active branches than non-Southern states and a positive correlation coefficient, this would support my hypothesis. If non-Southern states have an equal or greater average number of active branches than Southern states or there is no statistically significant difference, this would provide evidence against my hypothesis.</p>
+<p>The null hypothesis is that the difference in mean number of Klans per non-Southern state is greater than or equal to the mean number of Klans per Southern state. The alternative hypothesis is that the difference in mean number of Klans per non-Southern states is less than the mean number of Klans per Southern state.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
-<span><span class='va'>klans</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"klanmap_data_2025_3.csv"</span><span class='op'>)</span></span>
-<span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>klans</span><span class='op'>)</span></span></code></pre>
-</div>
 <pre><code># A tibble: 6 × 10
      id state   city     klan_number nickname notes latitude longitude
   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;
@@ -1566,39 +1563,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 # ℹ 2 more variables: year &lt;dbl&gt;, sources &lt;chr&gt;</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span>
-<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://broom.tidymodels.org/'>broom</a></span><span class='op'>)</span></span>
-<span><span class='va'>south_states</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Alabama"</span>, <span class='st'>"Arkansas"</span>, <span class='st'>"Florida"</span>, <span class='st'>"Georgia"</span>, <span class='st'>"Louisiana"</span>, <span class='st'>"Mississippi"</span>, <span class='st'>"North Carolina"</span>, <span class='st'>"South Carolina"</span>, <span class='st'>"Tennessee"</span>, <span class='st'>"Texas"</span>, <span class='st'>"Virginia"</span> <span class='op'>)</span></span>
-<span><span class='va'>klans</span> <span class='op'>&lt;-</span> <span class='va'>klans</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>if_South <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>state</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='va'>south_states</span>, <span class='st'>"Southern"</span>, <span class='st'>"Non-Southern"</span><span class='op'>)</span><span class='op'>)</span> </span>
-<span>  </span>
-<span><span class='va'>plot</span> <span class='op'>&lt;-</span> <span class='va'>klans</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>if_South</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>mean_klan <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>klan_number</span>, na.rm <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>if_South</span>, y <span class='op'>=</span> <span class='va'>mean_klan</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> </span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>binwidth <span class='op'>=</span> <span class='fl'>0.5</span>, fill <span class='op'>=</span> <span class='st'>"red"</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_discrete.html'>scale_x_discrete</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
-<span>    x <span class='op'>=</span> <span class='st'>"Non-Southern v. Southern States"</span>,</span>
-<span>    y <span class='op'>=</span> <span class='st'>"Average Number of Klans"</span>,</span>
-<span>    title <span class='op'>=</span> <span class='st'>"Klans Compared by State 1915-1940"</span><span class='op'>)</span>  </span>
-<span><span class='va'>plot</span></span></code></pre>
-</div>
 <p><img src="index_files/figure-html5/unnamed-chunk-2-1.png" alt="" width="624" /></p>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>table</span> <span class='op'>&lt;-</span> <span class='va'>klans</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>if_South</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>mean_klan <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>klan_number</span>, na.rm <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span> <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>if_South</span>,</span>
-<span>              values_from <span class='op'>=</span> <span class='va'>mean_klan</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span><span class='st'>" "</span> <span class='op'>=</span> <span class='st'>"Average # of Klans"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='st'>" "</span>, <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
-<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>table</span>,</span>
-<span>             digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span></code></pre>
-</div>
 <table>
 <thead>
 <tr class="header">
@@ -1616,7 +1583,22 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </tbody>
 </table>
 </div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>##Results</p>
+<p>Note: the independent variable is binary and because of this, the regression line is not a “trend line”, but connects two group means.</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" alt="" width="624" /></p>
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic   p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)    81.1       2.08     38.9  1.01e-255
+2 if_South        6.00      3.80      1.58 1.15e-  1</code></pre>
+<pre><code>[1] 0.0575</code></pre>
+</div>
+<p>The main coefficient of interest is 5.997. This means that, on average, Southern states will have a total of 6 more Klans than non-Southern states. The p-value is 0.0575. So, with an alpha of 0.05, this data is not statistically significant and we fail to reject the null hypothesis. Substantively, this suggests a potentially meaningful difference in Klan presence between regions. However, the large variation in Klan counts across states reduces confidence in this estimate.</p>
+<p>##Conclusion</p>
+<p>This analysis provides some evidence that Southern states may have more Klans, on average, than non-Southern states. However, these results are not statistically significant. Therefore, we fail to reject the null hypothesis that the difference in mean number of Klans per non-Southern state is greater than or equal to the mean number of Klans per Southern state.</p>
+<p>The limitation to this analysis is size of the state. It would be more informing to do an average number of Klans per captia. This is because bigger states will most likely have more Klans and this can act as a potential confounder in the results. Future analysis could be improved with analysis of state size within the data set.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

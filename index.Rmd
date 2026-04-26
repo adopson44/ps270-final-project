@@ -9,47 +9,76 @@ output:
 
 
 
-## Project thoughts
+## Introduction
 
-I am interested in exploring data related to the Ku Klux Klan and if geographical location plays a role in how many Klans are active in an area.
+I am interested in exploring data related to the Ku Klux Klan and if geographical location plays a role in how many Klans are active in an area. My research question is: Was the Ku Klux Klan more active in Southern states or non-Southern states? My hypothesis is that the Southern states had more active Klans than non-Southern states. This research question is important because it is always assumed that the Southern states would have more Klans and were more racist than the non-Southern states. I want to investigate if this is truly the case.
 
-## Project Proposal
+## Data Section
 
-Was the Ku Klux Klan more active in Southern states or the rest of the states? In this study, I plan to examine if there were more active Ku Klux Klans in Southern states compared to the rest of the nation. I believe that compared to the rest of the country, the states Alabama, Arkansas, Florida, Georgia, Louisiana, Mississippi, North Carolina, South Carolina, Tennessee, Texas, and Virginia combined had more active Klans. I expect this because these were the states the seceded to form the confederacy as they wanted to continue slavery. This sample compiles data of 2,000 active KKK branches from 1915-1940. My unit of analysis is the state. The explanatory variable of interest is if the state is located in the South, which I will create to be coded =0 if it is not and =1 if it is. My outcome variable is the level of KKK activity which is measured by the number of active branches of the KKK in each state during this time. If Southern states have a higher average number of active branches than non-Southern states and a positive correlation coefficient, this would support my hypothesis. If non-Southern states have an equal or greater average number of active branches than Southern states or there is no statistically significant difference, this would provide evidence against my hypothesis.
+ In this study, I plan to examine if there were more active Ku Klux Klans in Southern states compared to the rest of the nation. I believe that compared to the rest of the country, the states Alabama, Arkansas, Florida, Georgia, Louisiana, Mississippi, North Carolina, South Carolina, Tennessee, Texas, and Virginia combined had more active Klans. I expect this because these were the states that ceded the seceded to form the confederacy as they wanted to continue slavery. 
+ 
+This is a cross-sectional study and I will be conducting a difference of means test. This sample compiles data of 2,000 active KKK branches from 1915-1940. My unit of analysis is the state. The explanatory variable of interest is if the state is located in the South, which I will create to be coded =0 if it is not and =1 if it is. My outcome variable is the level of KKK activity which is measured by the number of active branches of the KKK in each state during this time. If Southern states have a higher average number of active branches than non-Southern states and a positive correlation coefficient, this would support my hypothesis. If non-Southern states have an equal or greater average number of active branches than Southern states or there is no statistically significant difference, this would provide evidence against my hypothesis. 
+ 
+The null hypothesis is that the difference in mean number of Klans per non-Southern state is greater than or equal to the mean number of Klans per Southern state. The alternative hypothesis is that the difference in mean number of Klans per non-Southern states is less than the mean number of Klans per Southern state.
 
-```{r}
+```{r, echo = FALSE}
 library(tidyverse)
 klans <- read_csv("klanmap_data_2025_3.csv")
 head(klans)
 ```
-```{r}
+```{r, echo = FALSE}
 library(ggplot2)
 library(broom)
 south_states = c("Alabama", "Arkansas", "Florida", "Georgia", "Louisiana", "Mississippi", "North Carolina", "South Carolina", "Tennessee", "Texas", "Virginia" )
 klans <- klans |>
-  mutate(if_South = if_else(state %in% south_states, "Southern", "Non-Southern")) 
-  
+  mutate(if_South = if_else(state %in% south_states, 1, 0), 
+         if_South_labels = if_else(if_South == 1, "Southern", "Non-Southern")) 
 plot <- klans |>
-  group_by(if_South) |>
+  group_by(if_South_labels) |>
   summarize(mean_klan = mean(klan_number, na.rm = T)) |>
-  ggplot(aes(x = if_South, y = mean_klan)) + 
+  ggplot(aes(x = if_South_labels, y = mean_klan)) + 
   geom_col(binwidth = 0.5, fill = "red") +
   scale_x_discrete() +
   labs(
-    x = "Non-Southern v. Southern States",
-    y = "Average Number of Klans",
-    title = "Klans Compared by State 1915-1940")  
+    x = "North v. South States",
+    y = "Number of Klans",
+    title = "Klans Compared by State")  
 plot
 ```
-```{r}
+
+```{r, echo = FALSE}
 table <- klans |>
-  group_by(if_South) |>
+  group_by(if_South_labels) |>
   summarize(mean_klan = mean(klan_number, na.rm = T)) |>
- pivot_wider(names_from = if_South,
+ pivot_wider(names_from = if_South_labels,
               values_from = mean_klan) |>
   mutate(" " = "Average # of Klans") |>
   select(" ", everything())
 knitr::kable(table,
              digits = 2)
 ```
+##Results
+
+Note: the independent variable is binary and because of this, the regression line is not a "trend line", but connects two group means. 
+
+```{r, echo = FALSE}
+library(broom)
+plot2 <- ggplot(klans, aes(x = if_South, y = klan_number)) +
+  geom_point() +                          
+  geom_smooth(method = "lm", se = TRUE)   
+plot2
+south_lm <- lm(klan_number ~ if_South, data = klans)
+lm_summary = summary(south_lm)
+tidy(lm_summary)
+p_one_sided = 0.115/2
+p_one_sided
+```
+The main coefficient of interest is 5.997. This means that, on average, Southern states will have a total of 6 more Klans than non-Southern states. The p-value is 0.0575. So, with an alpha of 0.05, this data is not statistically significant and we fail to reject the null hypothesis. Substantively, this suggests a potentially meaningful difference in Klan presence between regions. However, the large variation in Klan counts across states reduces confidence in this estimate. 
+
+##Conclusion
+
+This analysis provides some evidence that Southern states may have more Klans, on average, than non-Southern states. However, these results are not statistically significant. Therefore, we fail to reject the null hypothesis that the difference in mean number of Klans per non-Southern state is greater than or equal to the mean number of Klans per Southern state.
+
+The limitation to this analysis is size of the state. It would be more informing to do an average number of Klans per captia. This is because bigger states will most likely have more Klans and this can act as a potential confounder in the results. Future analysis could be improved with analysis of state size within the data set.
+
 

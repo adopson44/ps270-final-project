@@ -57,7 +57,7 @@ table <- klans |>
 knitr::kable(table,
              digits = 2)
 ```
-##Results
+## Results
 
 Note: the independent variable is binary and because of this, the regression line is not a "trend line", but connects two group means. 
 
@@ -75,7 +75,7 @@ p_one_sided
 ```
 The main coefficient of interest is 5.997. This means that, on average, Southern states will have a total of 6 more Klans than non-Southern states. The p-value is 0.0575. So, with an alpha of 0.05, this data is not statistically significant and we fail to reject the null hypothesis. Substantively, this suggests a potentially meaningful difference in Klan presence between regions. However, the large variation in Klan counts across states reduces confidence in this estimate. 
 
-##Conclusion
+## Conclusion
 
 This analysis provides some evidence that Southern states may have more Klans, on average, than non-Southern states. However, these results are not statistically significant. Therefore, we fail to reject the null hypothesis that the difference in mean number of Klans per non-Southern state is greater than or equal to the mean number of Klans per Southern state.
 

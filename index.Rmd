@@ -19,12 +19,11 @@ I am interested in exploring data related to the Ku Klux Klan and if geographica
  
 This is a cross-sectional study and I will be conducting a difference of means test. This sample compiles data of 2,000 active KKK branches from 1915-1940. My unit of analysis is the state. The explanatory variable of interest is if the state is located in the South, which I will create to be coded =0 if it is not and =1 if it is. My outcome variable is the level of KKK activity which is measured by the number of active branches of the KKK in each state during this time. If Southern states have a higher average number of active branches than non-Southern states and a positive correlation coefficient, this would support my hypothesis. If non-Southern states have an equal or greater average number of active branches than Southern states or there is no statistically significant difference, this would provide evidence against my hypothesis. 
  
-The null hypothesis is that the difference in mean number of Klans per non-Southern state is greater than or equal to the mean number of Klans per Southern state. The alternative hypothesis is that the difference in mean number of Klans per non-Southern states is less than the mean number of Klans per Southern state.
+The null hypothesis is that there is no difference in mean number of Klans per non-Southern state and mean number of Klans per Southern state. The alternative hypothesis is that there is a difference in mean number of Klans per non-Southern states and mean number of Klans per Southern state.
 
 ```{r, echo = FALSE}
 library(tidyverse)
 klans <- read_csv("klanmap_data_2025_3.csv")
-head(klans)
 ```
 ```{r, echo = FALSE}
 library(ggplot2)
@@ -64,20 +63,33 @@ Note: the independent variable is binary and because of this, the regression lin
 ```{r, echo = FALSE}
 library(broom)
 plot2 <- ggplot(klans, aes(x = if_South_labels, y = klan_number)) +
-  geom_boxplot() 
+  geom_boxplot() +
+  labs(
+    x = "Non-Southern vs. Southern",
+      y = "Average Klan Number",
+      title = "Boxplot of Average Klan Number per State"
+  )
 plot2
 south_lm <- lm(klan_number ~ if_South, data = klans)
 lm_summary = summary(south_lm)
 tidy(lm_summary)
-p_one_sided = 0.115/2
-p_one_sided
 ```
-The main coefficient of interest is 5.997. This means that, on average, Southern states will have a total of 6 more Klans than non-Southern states. The p-value is 0.0575. So, with an alpha of 0.05, this data is not statistically significant and we fail to reject the null hypothesis. Substantively, this suggests a potentially meaningful difference in Klan presence between regions. However, the large variation in Klan counts across states reduces confidence in this estimate. 
+The main coefficient of interest is 5.997. This means that, on average, Southern states will have a total of 6 more Klans than non-Southern states. The p-value is 0.115. So, with an alpha of 0.05, this data is not statistically significant and we fail to reject the null hypothesis. Substantively, this suggests a potentially meaningful difference in Klan presence between regions. However, the large variation in Klan counts across states reduces confidence in this estimate. 
 
 ## Conclusion
 
-This analysis provides some evidence that Southern states may have more Klans, on average, than non-Southern states. However, these results are not statistically significant. Therefore, we fail to reject the null hypothesis that the difference in mean number of Klans per non-Southern state is greater than or equal to the mean number of Klans per Southern state.
+This analysis provides some evidence that Southern states may have more Klans, on average, than non-Southern states. However, these results are not statistically significant. Therefore, we fail to reject the null hypothesis that the difference in mean number of Klans per non-Southern state is differs from the mean number of Klans per Southern state.
 
 The limitation to this analysis is size of the state. It would be more informing to do an average number of Klans per captia. This is because bigger states will most likely have more Klans and this can act as a potential confounder in the results. Future analysis could be improved with analysis of state size within the data set.
+
+## Additional One-Sided Test
+
+In this additional section, I want to conduct a one sided test for difference in means where the null hypothesis is where the mean number of Klans per Non-Southern state is greater than or equal to the mean number of Klans per Southern state and the alternative hypothesis is the mean number of Klans per Non-Southern state is less than the mean number of Klans per Southern state. My argument for conducting a one-sided test is that, historically, there has been more racial violence in Southern states, especially those that once belonged to the Confederacy. These states separated from America because they wanted slavery to stay a legal practice. The history of these states is rooted in racism and, therefore, I want to conduct an additional one-sided test to test this hypothesis. 
+
+```{r}
+one_sided_test <- t.test(klan_number ~ if_South, data = klans, alternative = "greater")
+one_sided_test$p.value
+```
+
 
 

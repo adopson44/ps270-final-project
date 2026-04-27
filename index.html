@@ -1549,18 +1549,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h2 id="data-section">Data Section</h2>
 <p>In this study, I plan to examine if there were more active Ku Klux Klans in Southern states compared to the rest of the nation. I believe that compared to the rest of the country, the states Alabama, Arkansas, Florida, Georgia, Louisiana, Mississippi, North Carolina, South Carolina, Tennessee, Texas, and Virginia combined had more active Klans. I expect this because these were the states that ceded the seceded to form the confederacy as they wanted to continue slavery.</p>
 <p>This is a cross-sectional study and I will be conducting a difference of means test. This sample compiles data of 2,000 active KKK branches from 1915-1940. My unit of analysis is the state. The explanatory variable of interest is if the state is located in the South, which I will create to be coded =0 if it is not and =1 if it is. My outcome variable is the level of KKK activity which is measured by the number of active branches of the KKK in each state during this time. If Southern states have a higher average number of active branches than non-Southern states and a positive correlation coefficient, this would support my hypothesis. If non-Southern states have an equal or greater average number of active branches than Southern states or there is no statistically significant difference, this would provide evidence against my hypothesis.</p>
-<p>The null hypothesis is that the difference in mean number of Klans per non-Southern state is greater than or equal to the mean number of Klans per Southern state. The alternative hypothesis is that the difference in mean number of Klans per non-Southern states is less than the mean number of Klans per Southern state.</p>
+<p>The null hypothesis is that there is no difference in mean number of Klans per non-Southern state and mean number of Klans per Southern state. The alternative hypothesis is that there is a difference in mean number of Klans per non-Southern states and mean number of Klans per Southern state.</p>
 <div class="layout-chunk" data-layout="l-body">
-<pre><code># A tibble: 6 × 10
-     id state   city     klan_number nickname notes latitude longitude
-  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-1     1 Alabama Birming…           1 R. E. L… may …     33.5     -86.8
-2     2 Alabama Bessemer           2 Niles B… &lt;NA&gt;      33.4     -87.0
-3     3 Alabama Montgom…           3 &lt;NA&gt;     &lt;NA&gt;      32.4     -86.3
-4     4 Alabama Anniston           4 &lt;NA&gt;     &lt;NA&gt;      33.7     -85.8
-5     5 Alabama Birming…           6 Nathan … &lt;NA&gt;      33.5     -86.8
-6     6 Alabama Huntsvi…           9 &lt;NA&gt;     &lt;NA&gt;      34.7     -86.6
-# ℹ 2 more variables: year &lt;dbl&gt;, sources &lt;chr&gt;</code></pre>
+
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="index_files/figure-html5/unnamed-chunk-2-1.png" alt="" width="624" /></p>
@@ -1592,13 +1583,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
 1 (Intercept)    81.1       2.08     38.9  1.01e-255
 2 if_South        6.00      3.80      1.58 1.15e-  1</code></pre>
-<pre><code>[1] 0.0575</code></pre>
 </div>
-<p>The main coefficient of interest is 5.997. This means that, on average, Southern states will have a total of 6 more Klans than non-Southern states. The p-value is 0.0575. So, with an alpha of 0.05, this data is not statistically significant and we fail to reject the null hypothesis. Substantively, this suggests a potentially meaningful difference in Klan presence between regions. However, the large variation in Klan counts across states reduces confidence in this estimate.</p>
+<p>The main coefficient of interest is 5.997. This means that, on average, Southern states will have a total of 6 more Klans than non-Southern states. The p-value is 0.115. So, with an alpha of 0.05, this data is not statistically significant and we fail to reject the null hypothesis. Substantively, this suggests a potentially meaningful difference in Klan presence between regions. However, the large variation in Klan counts across states reduces confidence in this estimate.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>This analysis provides some evidence that Southern states may have more Klans, on average, than non-Southern states. However, these results are not statistically significant. Therefore, we fail to reject the null hypothesis that the difference in mean number of Klans per non-Southern state is greater than or equal to the mean number of Klans per Southern state.</p>
+<p>This analysis provides some evidence that Southern states may have more Klans, on average, than non-Southern states. However, these results are not statistically significant. Therefore, we fail to reject the null hypothesis that the difference in mean number of Klans per non-Southern state is differs from the mean number of Klans per Southern state.</p>
 <p>The limitation to this analysis is size of the state. It would be more informing to do an average number of Klans per captia. This is because bigger states will most likely have more Klans and this can act as a potential confounder in the results. Future analysis could be improved with analysis of state size within the data set.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h2 id="additional-one-sided-test">Additional One-Sided Test</h2>
+<p>In this additional section, I want to conduct a one sided test for difference in means where the null hypothesis is where the mean number of Klans per Non-Southern state is greater than or equal to the mean number of Klans per Southern state and the alternative hypothesis is the mean number of Klans per Non-Southern state is less than the mean number of Klans per Southern state. My argument for conducting a one-sided test is that, historically, there has been more racial violence in Southern states, especially those that once belonged to the Confederacy. These states separated from America because they wanted slavery to stay a legal practice. The history of these states is rooted in racism and, therefore, I want to conduct an additional one-sided test to test this hypothesis.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>one_sided_test</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>klan_number</span> <span class='op'>~</span> <span class='va'>if_South</span>, data <span class='op'>=</span> <span class='va'>klans</span>, alternative <span class='op'>=</span> <span class='st'>"greater"</span><span class='op'>)</span></span>
+<span><span class='va'>one_sided_test</span><span class='op'>$</span><span class='va'>p.value</span></span></code></pre>
+</div>
+<pre><code>[1] 0.9532684</code></pre>
+</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

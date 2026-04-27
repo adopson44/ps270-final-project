@@ -40,7 +40,7 @@ plot <- klans |>
   geom_col(binwidth = 0.5, fill = "red") +
   scale_x_discrete() +
   labs(
-    x = "North v. South States",
+    x = "Non-Southern v. Southern States",
     y = "Number of Klans",
     title = "Klans Compared by State")  
 plot

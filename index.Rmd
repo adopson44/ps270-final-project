@@ -58,8 +58,6 @@ knitr::kable(table,
 ```
 ## Results
 
-Note: the independent variable is binary and because of this, the regression line is not a "trend line", but connects two group means. 
-
 ```{r, echo = FALSE}
 library(broom)
 plot2 <- ggplot(klans, aes(x = if_South_labels, y = klan_number)) +
@@ -86,10 +84,10 @@ The limitation to this analysis is size of the state. It would be more informing
 
 In this additional section, I want to conduct a one sided test for difference in means where the null hypothesis is where the mean number of Klans per Non-Southern state is greater than or equal to the mean number of Klans per Southern state and the alternative hypothesis is the mean number of Klans per Non-Southern state is less than the mean number of Klans per Southern state. My argument for conducting a one-sided test is that, historically, there has been more racial violence in Southern states, especially those that once belonged to the Confederacy. These states separated from America because they wanted slavery to stay a legal practice. The history of these states is rooted in racism and, therefore, I want to conduct an additional one-sided test to test this hypothesis. 
 
-```{r}
-one_sided_test <- t.test(klan_number ~ if_South, data = klans, alternative = "greater")
-one_sided_test$p.value
+```{r, echo = FALSE}
+one_sided_test <- t.test(klan_number ~ if_South, data = klans, alternative = "less")
+cat("The p-value is", round(one_sided_test$p.value, 4))
 ```
 
-
+This is the p-value of the one-sided test. The data provides sufficient evidence to support the alternative hypothesis. Since the p-value of 0.0467 is less than the alpha of 0.05, we reject the null hypothesis that the mean number of Klans per Non-Southern state is greater than or equal to the mean number of Klans per Southern state. This gives evidence for my hypothesis and due because of the small p-value, it is unlikely due to chance that this difference in means occur, making these results statistically significant. 
 

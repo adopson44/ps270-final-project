@@ -1575,7 +1575,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </table>
 </div>
 <h2 id="results">Results</h2>
-<p>Note: the independent variable is binary and because of this, the regression line is not a “trend line”, but connects two group means.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" alt="" width="624" /></p>
 <pre><code># A tibble: 2 × 5
@@ -1591,12 +1590,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h2 id="additional-one-sided-test">Additional One-Sided Test</h2>
 <p>In this additional section, I want to conduct a one sided test for difference in means where the null hypothesis is where the mean number of Klans per Non-Southern state is greater than or equal to the mean number of Klans per Southern state and the alternative hypothesis is the mean number of Klans per Non-Southern state is less than the mean number of Klans per Southern state. My argument for conducting a one-sided test is that, historically, there has been more racial violence in Southern states, especially those that once belonged to the Confederacy. These states separated from America because they wanted slavery to stay a legal practice. The history of these states is rooted in racism and, therefore, I want to conduct an additional one-sided test to test this hypothesis.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>one_sided_test</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>klan_number</span> <span class='op'>~</span> <span class='va'>if_South</span>, data <span class='op'>=</span> <span class='va'>klans</span>, alternative <span class='op'>=</span> <span class='st'>"greater"</span><span class='op'>)</span></span>
-<span><span class='va'>one_sided_test</span><span class='op'>$</span><span class='va'>p.value</span></span></code></pre>
+<pre><code>The p-value is 0.0467</code></pre>
 </div>
-<pre><code>[1] 0.9532684</code></pre>
-</div>
+<p>This is the p-value of the one-sided test. The data provides sufficient evidence to support the alternative hypothesis. Since the p-value of 0.0467 is less than the alpha of 0.05, we reject the null hypothesis that the mean number of Klans per Non-Southern state is greater than or equal to the mean number of Klans per Southern state. This gives evidence for my hypothesis and due because of the small p-value, it is unlikely due to chance that this difference in means occur, making these results statistically significant.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

@@ -63,9 +63,8 @@ Note: the independent variable is binary and because of this, the regression lin
 
 ```{r, echo = FALSE}
 library(broom)
-plot2 <- ggplot(klans, aes(x = if_South, y = klan_number)) +
-  geom_point() +                          
-  geom_smooth(method = "lm", se = TRUE)   
+plot2 <- ggplot(klans, aes(x = if_South_labels, y = klan_number)) +
+  geom_boxplot() 
 plot2
 south_lm <- lm(klan_number ~ if_South, data = klans)
 lm_summary = summary(south_lm)

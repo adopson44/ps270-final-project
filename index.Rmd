@@ -1,7 +1,6 @@
 ---
-title: "PS270 Final Project"
+title: "KKK Activity"
 author: "Anna Dopson"
-description: "My final project"
 output:
   distill::distill_article:
     self_contained: false
